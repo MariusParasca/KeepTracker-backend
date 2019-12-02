@@ -21,11 +21,6 @@
     "sequelize-typescript": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/node": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/register": "^7.7.4",
     "@types/express": "^4.17.2",
     "@types/node": "^12.12.14",
     "@types/sequelize": "github:types/sequelize",
