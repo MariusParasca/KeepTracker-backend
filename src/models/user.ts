@@ -1,4 +1,17 @@
-import { Model, Column, Table, PrimaryKey, IsUUID, CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import {
+	Model,
+	Column,
+	Table,
+	PrimaryKey,
+	IsUUID,
+	CreatedAt,
+	UpdatedAt,
+	AllowNull,
+	ForeignKey,
+	BelongsTo,
+} from 'sequelize-typescript';
+
+import { Role } from './role';
 
 @Table
 export class User extends Model<User> {
@@ -7,6 +20,7 @@ export class User extends Model<User> {
 	@Column
 	id!: number;
 
+	@AllowNull(false)
 	@Column
 	email!: number;
 
@@ -15,6 +29,14 @@ export class User extends Model<User> {
 
 	@Column
 	lastName!: string;
+
+	@AllowNull(false)
+	@ForeignKey(() => Role)
+	@Column
+	roleId!: number;
+
+	@BelongsTo(() => Role)
+	role!: Role;
 
 	@CreatedAt
 	@Column
