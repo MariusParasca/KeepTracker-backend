@@ -1,17 +1,37 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
-import sequelize from './models';
-import { User } from './models/user';
+import express, { Application } from 'express';
+import { ApolloServer, gql } from 'apollo-server-express'
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import { makeExecutableSchema } from 'graphql-tools';
 
 const app: Application = express();
 
-(async (): Promise<void> => {
-	await sequelize.sync({ force: true });
-	console.log('connected to database');
-	console.log(await User.findAll());
+const typeDefs = gql`
+  type Query {
+    announcement: String
+  }
+`;
 
-	app.get('/', (req: Request, res: Response, next: NextFunction) => {
-		res.send('Hello');
-	});
+// Provide resolver functions for your schema fields
+const resolvers = {
+	Query: {
+		announcement: () =>
+			`Say hello to the new Apollo Server! A production ready GraphQL server with an incredible getting started experience.`
+	}
+};
 
-	app.listen(5000, () => console.log('Server running'));
-})();
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+app.use(cors(), bodyParser.json());
+
+const server = new ApolloServer({
+	schema
+});
+
+server.applyMiddleware({ app });
+
+app.listen(
+	9000, () => console.info(
+		`Server started on port 9000`
+	)
+);
