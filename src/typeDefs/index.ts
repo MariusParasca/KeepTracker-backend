@@ -1,4 +1,4 @@
-import userTypeDef from './userTypeDef';
+import userTypeDef from './userTypeDefs';
 
 const typeDefs = [userTypeDef];
 

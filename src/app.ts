@@ -4,6 +4,9 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { makeExecutableSchema } from 'graphql-tools';
 
+import 'module-alias/register';
+import './connection';
+
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
