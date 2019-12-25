@@ -9,11 +9,11 @@ export const UserTypeDef = gql`
   }
 
   type Query {
-    userByEmail(userEmail: String): User
+    userByEmail(userEmail: String!): User
   }
 
   type Mutation {
-    createUser(firstName: String, lastName: String, email: String): User
+    createUser(firstName: String!, lastName: String!, email: String!): User
   }
 `;
 

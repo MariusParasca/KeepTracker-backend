@@ -9,6 +9,7 @@ import './connection';
 
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
 const app: Application = express();
 
@@ -18,6 +19,9 @@ app.use(cors(), bodyParser.json());
 
 const server = new ApolloServer({
   schema,
+  formatError: (err: GraphQLError): GraphQLFormattedError<Record<string, any>> => {
+    return new Error(err.message);
+  },
 });
 
 server.applyMiddleware({ app });

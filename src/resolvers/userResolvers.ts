@@ -1,5 +1,8 @@
 import User, { UserInterface } from '@models/user';
 import { DocumentQuery } from 'mongoose';
+import UserService from '@services/userService';
+
+const userService = new UserService();
 
 const userResolvers = {
   Query: {
@@ -8,13 +11,8 @@ const userResolvers = {
     },
   },
   Mutation: {
-    createUser: (_root: any, args: any): Promise<UserInterface> => {
-      const user = new User({
-        email: args.email,
-        firstName: args.firstName,
-        lastName: args.lastName,
-      });
-      return user.save();
+    createUser: (_root: any, args: UserInterface, context: any): Promise<UserInterface> => {
+      return userService.createUser(args);
     },
   },
 };

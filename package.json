@@ -12,6 +12,7 @@
     "acl": "^0.4.11",
     "apollo-server-express": "^2.9.13",
     "body-parser": "^1.19.0",
+    "easygraphql-format-error": "0.0.3",
     "express": "~4.16.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.8",
@@ -40,6 +41,8 @@
     "typescript": "^3.7.2"
   },
   "_moduleAliases": {
-    "@models": "src/models"
+    "@models": "src/models",
+    "@services": "src/services",
+    "@errors": "src/errors"
   }
 }
