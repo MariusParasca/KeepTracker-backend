@@ -12,4 +12,4 @@ const UserSchema: Schema = new Schema({
   lastName: { type: String, required: true },
 });
 
-export default mongoose.model<UserInterface>('author', UserSchema);
+export default mongoose.model<UserInterface>('user', UserSchema);
