@@ -1,6 +1,6 @@
-import User, { UserInterface } from '@models/user';
+import User, { UserInterface, UserLoggedInterface } from '@models/user';
 import { DocumentQuery } from 'mongoose';
-import UserService from '@services/userService';
+import UserService from '@services/UserService';
 
 const userService = new UserService();
 
@@ -11,7 +11,7 @@ const userResolvers = {
     },
   },
   Mutation: {
-    createUser: (_root: any, args: UserInterface): Promise<UserInterface> => {
+    createUser: (_root: any, args: UserInterface): Promise<UserLoggedInterface> => {
       return userService.createUser(args);
     },
   },

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
@@ -19,9 +21,9 @@ app.use(cors(), express.json());
 
 const server = new ApolloServer({
   schema,
-  formatError: (err: GraphQLError): GraphQLFormattedError<Record<string, any>> => {
-    return new Error(err.message);
-  },
+  // formatError: (err: GraphQLError): GraphQLFormattedError<Record<string, any>> => {
+  //   return new Error(err.message);
+  // },
 });
 
 server.applyMiddleware({ app });

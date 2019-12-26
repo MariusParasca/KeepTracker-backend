@@ -6,6 +6,8 @@ export const UserTypeDef = gql`
     firstName: String!
     lastName: String!
     email: String!
+    accessToken: String
+    refreshToken: String
   }
 
   type Query {
