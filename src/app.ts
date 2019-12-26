@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
+// import jwt from 'jsonwebtoken';
 import { makeExecutableSchema } from 'graphql-tools';
 
 import 'module-alias/register';
@@ -15,7 +15,7 @@ const app: Application = express();
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-app.use(cors(), bodyParser.json());
+app.use(cors(), express.json());
 
 const server = new ApolloServer({
   schema,

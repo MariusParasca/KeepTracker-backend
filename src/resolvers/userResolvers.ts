@@ -11,7 +11,7 @@ const userResolvers = {
     },
   },
   Mutation: {
-    createUser: (_root: any, args: UserInterface, context: any): Promise<UserInterface> => {
+    createUser: (_root: any, args: UserInterface): Promise<UserInterface> => {
       return userService.createUser(args);
     },
   },

@@ -13,7 +13,7 @@ export const UserTypeDef = gql`
   }
 
   type Mutation {
-    createUser(firstName: String!, lastName: String!, email: String!): User
+    createUser(firstName: String!, lastName: String!, email: String!, password: String!): User
   }
 `;
 
