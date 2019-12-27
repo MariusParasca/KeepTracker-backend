@@ -9,10 +9,13 @@ import './connection';
 import loginController, { loginValidator } from '@controllers/loginController';
 import tokenController, { tokenValidator } from '@controllers/tokenController';
 import logoutController, { logoutValidator } from '@controllers/logoutController';
+import registerController, { registerValidator } from '@controllers/registerController';
 
 const app: Application = express();
 
 app.use(cors(), express.json());
+
+app.post('/register', registerValidator, registerController);
 
 app.post('/login', loginValidator, loginController);
 

@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt';
+import HttpStatus from 'http-status-codes';
 
 import SecurityService from '@services/SecurityService';
 import User, { UserInterface, UserLoggedInterface } from '@models/user';
-import { USER_EXISTS, SERVER_ERROR } from '@constants/errorConstants';
+import { SERVER_ERROR } from '@constants/errorConstants';
 import { SALTED_ROUNDS } from '@constants/constants';
 
 export default class UserService {
@@ -19,11 +20,16 @@ export default class UserService {
     }
   };
 
-  createUser = async ({ email, firstName, lastName, password }: UserInterface): Promise<UserLoggedInterface> => {
+  createUser = async ({
+    email,
+    firstName,
+    lastName,
+    password,
+  }: UserInterface): Promise<UserLoggedInterface | number> => {
     const user = await User.findOne({ email: email });
 
     if (user !== null) {
-      throw new Error(USER_EXISTS);
+      return HttpStatus.BAD_REQUEST;
     }
 
     const newUser = new User({

@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { RefreshTokenInterface } from './refreshToken';
 
 export interface UserInterface extends Document {
   email: string;
