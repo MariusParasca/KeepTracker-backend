@@ -1,3 +1,4 @@
+import HttpStatus from 'http-status-codes';
 import bcrypt from 'bcrypt';
 import { validationResult, check } from 'express-validator';
 
@@ -11,14 +12,14 @@ export const loginValidator = [check('email').isEmail(), check('password').isLen
 const loginController = async (req: any, res: any): Promise<void> => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(HttpStatus.UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
   }
 
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
   if (!user) {
-    res.status(404).send({
+    res.status(HttpStatus.NOT_FOUND).send({
       success: false,
       message: `Could not find account: ${email}`,
     });
@@ -27,7 +28,7 @@ const loginController = async (req: any, res: any): Promise<void> => {
 
   const samePassword = await bcrypt.compare(password, user.password);
   if (!samePassword) {
-    res.status(401).send({
+    res.status(HttpStatus.UNAUTHORIZED).send({
       success: false,
       message: 'Incorrect credentials',
     });

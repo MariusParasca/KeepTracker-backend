@@ -1,4 +1,6 @@
+import HttpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
+
 import RefreshToken, { RefreshTokenInterface } from '@models/refreshToken';
 
 export default class SecurityService {
@@ -25,7 +27,7 @@ export default class SecurityService {
       const accessToken: string = this.generateAccessToken(user.name);
       return accessToken;
     } catch (error) {
-      return 403;
+      return HttpStatus.FORBIDDEN;
     }
   };
 }
