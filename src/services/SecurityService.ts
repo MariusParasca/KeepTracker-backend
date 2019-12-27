@@ -24,10 +24,20 @@ export default class SecurityService {
   generateAccessTokenByRefreshToken = (refreshToken: string): string | number => {
     try {
       const user: any = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET || '');
-      const accessToken: string = this.generateAccessToken(user.name);
-      return accessToken;
+      if (user) {
+        return this.generateAccessToken(user.name);
+      }
+      return HttpStatus.FORBIDDEN;
     } catch (error) {
       return HttpStatus.FORBIDDEN;
     }
+  };
+
+  isTokenValid = (accessToken: string): boolean => {
+    const user: any = jwt.verify(accessToken, process.env.REFRESH_TOKEN_SECRET || '');
+    if (user) {
+      return true;
+    }
+    return false;
   };
 }
