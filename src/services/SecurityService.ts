@@ -13,10 +13,19 @@ export default class SecurityService {
       refreshToken = new RefreshToken({ token, email });
       await refreshToken.save();
     } else {
-      refreshToken.token = token;
-      await refreshToken.updateOne({ _id: refreshToken.id });
+      await refreshToken.updateOne({ token });
     }
 
     return token;
+  };
+
+  generateAccessTokenByRefreshToken = (refreshToken: string): string | number => {
+    try {
+      const user: any = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET || '');
+      const accessToken: string = this.generateAccessToken(user.name);
+      return accessToken;
+    } catch (error) {
+      return 403;
+    }
   };
 }
