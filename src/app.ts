@@ -3,7 +3,6 @@ require('dotenv').config();
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
-import HttpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import { makeExecutableSchema } from 'graphql-tools';
 
@@ -13,27 +12,12 @@ import './connection';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
-import SecurityService from '@services/SecurityService';
 
 const app: Application = express();
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 app.use(cors(), express.json());
-
-// const securityService = new SecurityService();
-
-// function authenticateToken(req: any, res: any, next: Function): Promise<void> {
-//   const authHeader = req.headers['authorization'];
-//   const token = authHeader && authHeader.split(' ')[1];
-//   if (token == null) {
-//     return res.sendStatus(HttpStatus.UNAUTHORIZED);
-//   }
-//   if (securityService.isTokenValid(token)) {
-//     return next();
-//   }
-//   return res.sendStatus(HttpStatus.UNAUTHORIZED);
-// }
 
 const context = ({ req }: any): any => {
   const token = req.headers.authorization || '';
@@ -52,9 +36,9 @@ const context = ({ req }: any): any => {
 const server = new ApolloServer({
   schema,
   context,
-  // formatError: (err: GraphQLError): GraphQLFormattedError<Record<string, any>> => {
-  //   return new Error(err.message);
-  // },
+  formatError: (err: GraphQLError): GraphQLFormattedError<Record<string, any>> => {
+    return err;
+  },
 });
 
 server.applyMiddleware({ app });
