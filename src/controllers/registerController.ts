@@ -21,8 +21,7 @@ const registerController = async (req: any, res: any): Promise<void> => {
 
   if (user === HttpStatus.BAD_REQUEST) {
     return res.status(HttpStatus.BAD_REQUEST).send({
-      success: false,
-      message: `Email already exists: ${req.body.email}`,
+      message: `Email already exists`,
     });
   }
 

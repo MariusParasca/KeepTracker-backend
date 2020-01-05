@@ -12,7 +12,15 @@ POST http://localhost:9001/token
 Content-Type: application/json
 
 {
-"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTU3NzQ0MDQxOH0.QFTvSximZ0YUrasteMrUTvVObtppd7Zcd3yu9pf63mE"
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE1NzgyMjUyMDEsImV4cCI6MTU3ODIyNjEwMX0.lvQAS70-nwxw-nAXV545Mb7ftyavunjpDLBqYrbmpGE"
+}
+
+###
+POST http://localhost:9001/checkToken
+Content-Type: application/json
+
+{
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDJAdGVzdC5jb20iLCJpYXQiOjE1NzgyMjUzNTUsImV4cCI6MTU3ODIyNjI1NX0.3qlDw49DVK70PRSFr3MYBzdYj_RNEDwz8z5G_zy1tCM"
 }
 
 ###

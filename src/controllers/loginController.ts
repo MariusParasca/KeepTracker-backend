@@ -20,8 +20,7 @@ const loginController = async (req: any, res: any): Promise<void> => {
 
   if (!user) {
     res.status(HttpStatus.NOT_FOUND).send({
-      success: false,
-      message: `Could not find account: ${email}`,
+      message: `Could not find account`,
     });
     return;
   }
@@ -29,7 +28,6 @@ const loginController = async (req: any, res: any): Promise<void> => {
   const samePassword = await bcrypt.compare(password, user.password);
   if (!samePassword) {
     res.status(HttpStatus.UNAUTHORIZED).send({
-      success: false,
       message: 'Incorrect credentials',
     });
     return;
