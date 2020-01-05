@@ -23,7 +23,7 @@ export default class SecurityService {
 
   generateAccessTokenByRefreshToken = (refreshToken: string): string | number => {
     try {
-      const user: any = jwt.verify(refreshToken, process.env.ACCESS_TOKEN_SECRET || '');
+      const user: any = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET || '');
       if (user) {
         return this.generateAccessToken(user.name);
       }
